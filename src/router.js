@@ -2,6 +2,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 
+import HomeNestedP1 from './views/HomeNestedP1.vue';
+import HomeNestedP2 from './views/HomeNestedP2.vue';
+import HomeNestedP3 from './views/HomeNestedP3.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -9,17 +13,31 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/home/browse',
       name: 'home',
       component: Home,
+      children: [
+        {
+          name: 'homenestp1',
+          path: 'p1',
+          component: HomeNestedP1,
+        },
+        {
+          name: 'homenestp2',
+          path: 'p2',
+          component: HomeNestedP2,
+        },
+        {
+          name: 'homenestp3',
+          path: 'p3',
+          component: HomeNestedP3,
+        },
+      ],
     },
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      component: () => import(/* webpackChunkName: 'about' */ './views/About.vue'),
     },
   ],
 });
